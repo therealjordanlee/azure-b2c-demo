@@ -38,7 +38,7 @@ export const msalConfig: Configuration = {
  }
 
 export const protectedResources = {
-  todoListApi: {
+  api: {
     endpoint: "http://localhost:3000/WeatherForecast",
     scopes: ["https://jordanleemedium.onmicrosoft.com/test-api/all.read"],
   },
