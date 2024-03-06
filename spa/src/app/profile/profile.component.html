@@ -1,1 +1,14 @@
-<p>profile works!</p>
+<h1>ID token claims:</h1>
+
+<table>
+    <tr>
+      <th>claim</th>
+      <th>value</th>
+    </tr>
+    @for(claim of dataSource; track claim){
+        <tr>
+            <td>{{claim.claim}}</td>
+            <td>{{claim.value}}</td>
+          </tr>
+    }
+</table>
