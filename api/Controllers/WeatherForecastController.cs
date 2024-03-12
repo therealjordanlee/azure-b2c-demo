@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Web.Resource;
 
 namespace TestAPI.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route("weatherforecast")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -20,7 +21,10 @@ namespace TestAPI.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
+        // In this example application, this endpoint works as the test-spa will have the required all.read scope
+        // for access.
+        [RequiredScope("all.read")]
+        [HttpGet("")]
         public IActionResult Get()
         {
             var response = new
@@ -33,6 +37,14 @@ namespace TestAPI.Controllers
                 }).ToArray()
             };
             return Ok(response);
+        }
+
+        // This endpoint will never be reachable, as the test-spa app was not granted the all.write scope.
+        [RequiredScope("all.write")]
+        [HttpGet("fail")]
+        public IActionResult ThisWillFail()
+        {
+            return Ok("You should never see this due to missing scope.");
         }
     }
 }
