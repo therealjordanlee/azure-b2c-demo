@@ -39,8 +39,9 @@ export const msalConfig: Configuration = {
 
 export const protectedResources = {
   api: {
-    endpoint: "http://localhost:3000/WeatherForecast",
+    endpoint: "http://localhost:3000/weatherforecast",
     scopes: ["https://jordanleemedium.onmicrosoft.com/test-api/all.read"],
+    failingEndpoint: "http://localhost:3000/weatherforecast/fail"
   },
 }
 export const loginRequest = {
