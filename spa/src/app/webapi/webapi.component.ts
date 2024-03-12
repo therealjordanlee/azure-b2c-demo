@@ -19,7 +19,8 @@ type WeatherForecastResult = {
   styleUrls: ['./webapi.component.css']
 })
 export class WebapiComponent implements OnInit {
-  todoListEndpoint: string = protectedResources.api.endpoint;
+  weatherForecastEndpoint: string = protectedResources.api.endpoint;
+  failEndpoint: string = protectedResources.api.failingEndpoint;
   weatherForecast: WeatherForecastResult = {
     result: []
   };
@@ -33,9 +34,16 @@ export class WebapiComponent implements OnInit {
   }
 
   getProfile() {
-    this.http.get<WeatherForecastResult>(this.todoListEndpoint)
-      .subscribe((profile) => {
-        this.weatherForecast = profile;
+    this.http.get<WeatherForecastResult>(this.weatherForecastEndpoint)
+      .subscribe((result) => {
+        this.weatherForecast = result;
       });
+  }
+
+  failFromInvalidScope(){
+    this.http.get(this.failEndpoint)
+    .subscribe(result => {
+      console.log(result);
+    })
   }
 }
